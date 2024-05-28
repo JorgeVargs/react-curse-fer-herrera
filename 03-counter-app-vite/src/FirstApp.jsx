@@ -13,7 +13,9 @@ export const FirstApp = ( {title,subTitle, name } )=> {
   
     return (
         <>        
-        <h1>{ title }</h1>
+        {/* <h1>{ title }</h1> */}
+        <div data-testid="test-title">{ title }</div>
+        <p>{ subTitle }</p>
         <p>{ subTitle }</p>
         <p>{ name }</p>
         </>
@@ -23,12 +25,12 @@ export const FirstApp = ( {title,subTitle, name } )=> {
 
 FirstApp.propTypes = {
     title:PropTypes.string.isRequired,
-    subTitle:PropTypes.number.isRequired
+    subTitle:PropTypes.string.isRequired
 }
 
 //valores por defectos 
 FirstApp.defaultProps = {
     title:'No hay titulo',
-    subTitle: 'No hay subtitulo',
+    subTitle: '123',
     name:'Luis Vargas'
 }
