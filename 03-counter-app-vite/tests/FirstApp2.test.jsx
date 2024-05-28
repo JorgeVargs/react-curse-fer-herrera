@@ -1,34 +1,34 @@
 import { FirstApp } from "../src/FirstApp";
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 describe('Pruebas en  <FirstApp />', () => {
-    // test('debe de hacer match con el snapshot', () => { 
-    //     const title = 'Hola soy luis';
-    //     const { container } = render(<FirstApp title={title} />);
 
-    //     expect( container ).toMatchSnapshot();
-    //  });
+    const title = 'Hola, Soy Luis';
+    const subTitle = 'Soy un subtitulo';
 
-    //  test('debe de mostrar el título en un h1', () => { 
-    //     const title = 'Hola soy luis ';
-    //     const { container, getByText,getByTestId } = render(<FirstApp title={title} />);
+    test('debe de hacer match con el snapshot', () => {
+        const { container } = render(<FirstApp title={ title }/>);
 
-    //     expect(getByText(title)).toBeTruthy();
-    //     // const h1 = container.querySelector('h1');
-    //     // expect(h1.innerHTML).toBe(title);
+        expect( container ).toMatchSnapshot();
+    });
 
-    //     expect(getByTestId('test-title').innerHTML).toContain(title)
-    //   });
+    test('debe de mostrar el mensaje "Hola, Soy Luis"', () => {
+        render(<FirstApp title={ title }/>);
+        expect( screen.getByText(title)).toBeTruthy();
+    });
 
-      test('debe de mostrar el subtitulo enviado por props', () => { 
-        const title = 'Hola soy luis ';
-        const subTitle = 'Soy un subtitulo';
+    test('debe mostrar el titulo en un h1 ', () => {
+      render(<FirstApp title={ title }/>);
+      expect(screen.getByRole('heading',{ level:1}).innerHTML).toContain(title);
+    });
 
-        const { getAllByText } = render(
-          <FirstApp title={title} 
-                  subTitle={subTitle} />);
+    test('debe de mostrar el subtitulo enviado por props', () => {
+      render(
+        <FirstApp 
+        title={ title }
+        subTitle = { subTitle }
+        />);
 
-        expect(getAllByText(subTitle).length).toBe(2);
-  
-      })
+      expect(screen.getAllByText(subTitle).length).toBe(2);
+    });
 })
